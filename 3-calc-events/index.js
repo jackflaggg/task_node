@@ -1,30 +1,27 @@
 'use strict';
+const Calculator = require('./Calculator');
+const args = process.argv.slice(2);
+const num1 = parseFloat(args[1]);
+const num2 = parseFloat(args[2]);
+const operation = args[0];
 
-const add = require('./add');
-const subtraction = require('./subtraction');
-const division = require('./division');
-const multiply = require('./multiply');
+const calculator = new Calculator();
 
-let num1 = parseInt(process.argv[2]);
-let num2 = parseInt(process.argv[3]);
-let operations = (process.argv[4]);
+calculator.on('+', (num1, num2) => {
+	console.log(`Сумма равна : ${num1 + num2}`)
+})
 
-let result;
-switch (operations) {
-	case '+':
-		result = add(num1, num2);
-		break;
-	case '-':
-		result = subtraction(num1, num2);
-		break;
-	case '/':
-		result = division(num1, num2);
-		break;
-	case '*':
-		result = multiply(num1, num2);
-		break
-	default:
-		result = 'Not Found! Invalid operations'
-		break;
-}
-console.log(result);
+calculator.on('*', (num1, num2) => {
+	console.log(`Умножение чисел равно : ${num1 * num2}`)
+})
+
+calculator.on('/', (num1, num2) => {
+	console.log(`Деление равно : ${num1 - num2}`)
+})
+
+calculator.on('-', (num1, num2) => {
+	console.log(`Вычитание равно : ${num1 - num2}`)
+})
+
+
+calculator.emit(operation, num1, num2)
