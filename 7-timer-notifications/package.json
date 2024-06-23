@@ -1,0 +1,20 @@
+{
+  "name": "7-timer-notifications",
+  "version": "1.0.0",
+  "description": "запускает таймера с уведомлением",
+  "main": "timer.js",
+  "dependencies": {
+    "node-notifier": "^10.0.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackflaggg/task_node.git"
+  },
+  "author": "Rasul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackflaggg/task_node/issues"
+  },
+  "homepage": "https://github.com/jackflaggg/task_node#readme"
+}
