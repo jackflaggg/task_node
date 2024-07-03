@@ -7,21 +7,23 @@ const rl = readline.createInterface({
 	output: process.stdout
 });
 
-rl.question('Введите время через пробел (часы минуты секунды): ', (input) => {
-	const [hours, minutes, seconds] = input.split(' ').map(elem => parseFloat(elem));
-	let remainingTime = hours * 3600 + minutes* 60 + seconds;
-	const downInterval = setInterval(() => {
-		const hoursDisplay = Math.floor(remainingTime/3600);
-		const minutesDisplay = Math.floor((remainingTime % 3600)/60);
-		const secondsDisplay = Math.floor(remainingTime % 60);
+function countdown(secondsRemaining) {
+	if (secondsRemaining >= 0) {
+		const hoursDisplay = Math.trunc(secondsRemaining / 3600);
+		const minutesDisplay = Math.trunc((secondsRemaining % 3600) / 60);
+		const secondsDisplay = Math.trunc(secondsRemaining % 60);
 
 		console.log(`${hoursDisplay} часов, ${minutesDisplay} минут, ${secondsDisplay} секунд`);
-		remainingTime -= 1;
+		setTimeout(() => countdown(secondsRemaining - 1), 1000);
+	} else {
+		console.log('Обратный отсчет завершен!');
+		rl.close();
+	}
+}
 
-		if (remainingTime < 0) {
-			clearInterval(downInterval);
-			console.log('Обратный отсчет завершен!')
-			rl.close;
-		}
-	}, 1000)
-})
+
+rl.question('Введите время через пробел (часы минуты секунды): ', (input) => {
+	const [hours, minutes, seconds] = input.split(' ').map(Number);
+	const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+	countdown(totalSeconds);
+});
