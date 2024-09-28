@@ -1,30 +1,16 @@
 'use strict';
 
-const add = require('./add');
-const subtraction = require('./subtraction');
-const division = require('./division');
-const multiply = require('./multiply');
-
-let num1 = parseInt(process.argv[2]);
-let num2 = parseInt(process.argv[3]);
-let operations = (process.argv[4]);
-
-let result;
-switch (operations) {
-	case '+':
-		result = add(num1, num2);
-		break;
-	case '-':
-		result = subtraction(num1, num2);
-		break;
-	case '/':
-		result = division(num1, num2);
-		break;
-	case '*':
-		result = multiply(num1, num2);
-		break
-	default:
-		result = 'Not Found! Invalid operations'
-		break;
+const operations = {
+	'+': require('./add'),
+	'-': require('./subtraction'),
+	'/': require('./division'),
+	'*': require('./multiply'),
 }
-console.log(result);
+const numberOne = parseFloat(process.argv[2]);
+const numberTwo = parseFloat(process.argv[3]);
+const symbolOp = process.argv[4]
+
+
+console.log(operations[symbolOp](numberOne, numberTwo));
+
+
